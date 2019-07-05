@@ -54,16 +54,14 @@ fun Date.add(value: Int, units: TimeUnits = TimeUnits.SECOND) : Date{
  * >360д "более года назад"
  */
 //fun Date.humanizeDiff(date : Date): String {
-fun Date.humanizeDiff(date : Date = Date()): String {
-
-
+fun Date.humanizeDiff(date : Date = this): String {
 
     val differenceTime = Date().time - date.time
 
     if (differenceTime < 0) return "invalid date"
 
     return when(differenceTime){
-        in 0* SECOND..1* SECOND -> "только что"
+        in 0L* SECOND..1L* SECOND -> "только что"
         in 1* SECOND..45* SECOND -> "несколько секунд назад"
         in 45* SECOND..75* SECOND -> "минуту назад"
 
@@ -132,27 +130,27 @@ private fun createTimeComments1(valueTime : Long, typeOfTime : TimeUnits) : Stri
             if (valueTime < 21){
                 return when(valueTime){
                     1L -> "1 секунду назад"
-                    in 2L..5L -> "$valueTime секунды назад"
+                    in 2L..4L -> "$valueTime секунды назад"
                     else -> "$valueTime секунд назад"
                 }
             } else {
                 if (valueTime < 100){
                     return when(valueTime.rem(10)){
                         1L -> "$valueTime секунду назад"
-                        in 2L..5L -> "$valueTime секунды назад"
+                        in 2L..4L -> "$valueTime секунды назад"
                         else -> "$valueTime секунд назад"
                     }
                 }
                 return if (valueTime < 1000){
                     when(valueTime.rem(100)){
                         1L -> "$valueTime секунду назад"
-                        in 2L..5L -> "$valueTime секунды назад"
+                        in 2L..4L -> "$valueTime секунды назад"
                         else -> "$valueTime секунд назад"
                     }
                 } else {
                     when(valueTime.rem(1000)){
                         1L -> "$valueTime секунду назад"
-                        in 2L..5L -> "$valueTime секунды назад"
+                        in 2L..4L -> "$valueTime секунды назад"
                         else -> "$valueTime секунд назад"
                     }
                 }
@@ -168,27 +166,27 @@ private fun createTimeComments1(valueTime : Long, typeOfTime : TimeUnits) : Stri
             if (valueTime < 21){
                 return when(valueTime){
                     1L -> "1 минуту назад"
-                    in 2L..5L -> "$valueTime минуты назад"
+                    in 2L..4L -> "$valueTime минуты назад"
                     else -> "$valueTime минут назад"
                 }
             } else {
                 if (valueTime < 100){
                     return when(valueTime.rem(10)){
                         1L -> "1 минуту назад"
-                        in 2L..5L -> "$valueTime минуты назад"
+                        in 2L..4L -> "$valueTime минуты назад"
                         else -> "$valueTime минут назад"
                     }
                 }
                 return if (valueTime < 1000){
                     when(valueTime.rem(100)){
                         1L -> "1 минуту назад"
-                        in 2L..5L -> "$valueTime минуты назад"
+                        in 2L..4L -> "$valueTime минуты назад"
                         else -> "$valueTime минут назад"
                     }
                 } else {
                     when(valueTime.rem(1000)){
                         1L -> "1 минуту назад"
-                        in 2L..5L -> "$valueTime минуты назад"
+                        in 2L..4L -> "$valueTime минуты назад"
                         else -> "$valueTime минут назад"
                     }
                 }
@@ -203,27 +201,27 @@ private fun createTimeComments1(valueTime : Long, typeOfTime : TimeUnits) : Stri
             if (valueTime < 21){
                 return when(valueTime){
                     1L -> "1 час назад"
-                    in 2L..5L -> "$valueTime часа назад"
+                    in 2L..4L -> "$valueTime часа назад"
                     else -> "$valueTime часов назад"
                 }
             } else {
                 if (valueTime < 100){
                     return when(valueTime.rem(10)){
                         1L -> "1 час назад"
-                        in 2L..5L -> "$valueTime часа назад"
+                        in 2L..4L -> "$valueTime часа назад"
                         else -> "$valueTime часов назад"
                     }
                 }
                 return if (valueTime < 1000){
                     when(valueTime.rem(100)){
                         1L -> "1 час назад"
-                        in 2L..5L -> "$valueTime часа назад"
+                        in 2L..4L -> "$valueTime часа назад"
                         else -> "$valueTime часов назад"
                     }
                 } else {
                     when(valueTime.rem(1000)){
                         1L -> "1 час назад"
-                        in 2L..5L -> "$valueTime часа назад"
+                        in 2L..4L -> "$valueTime часа назад"
                         else -> "$valueTime часов назад"
                     }
                 }
@@ -238,27 +236,27 @@ private fun createTimeComments1(valueTime : Long, typeOfTime : TimeUnits) : Stri
             if (valueTime < 21){
                 return when(valueTime){
                     1L -> "1 день назад"
-                    in 2L..5L -> "$valueTime дня назад"
+                    in 2L..4L -> "$valueTime дня назад"
                     else -> "$valueTime дней назад"
                 }
             } else {
                 if (valueTime < 100){
                     return when(valueTime.rem(10)){
                         1L -> "1 день назад"
-                        in 2L..5L -> "$valueTime дня назад"
+                        in 2L..4L -> "$valueTime дня назад"
                         else -> "$valueTime дней назад"
                     }
                 }
                 return if (valueTime < 1000){
                     when(valueTime.rem(100)){
                         1L -> "1 день назад"
-                        in 2L..5L -> "$valueTime дня назад"
+                        in 2L..4L -> "$valueTime дня назад"
                         else -> "$valueTime дней назад"
                     }
                 } else {
                     when(valueTime.rem(1000)){
                         1L -> "1 день назад"
-                        in 2L..5L -> "$valueTime дня назад"
+                        in 2L..4L -> "$valueTime дня назад"
                         else -> "$valueTime дней назад"
                     }
                 }
