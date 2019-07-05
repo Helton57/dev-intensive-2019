@@ -2,6 +2,12 @@ package ru.skillbranch.devintensive.utils
 
 object Utils {
 
+    private val mapLetters : Map<String, String> = mapOf("а" to "a", "б" to "b", "в" to "v", "г" to "g",
+        "д" to "d", "е" to "e", "ё" to "e", "ж" to "zh", "з" to "z", "и" to "i", "й" to "i", "к" to "k",
+        "л" to "l", "м" to "m", "н" to "n", "о" to "o", "п" to "p", "р" to "r", "с" to "s", "т" to "t",
+        "у" to "u", "ф" to "f", "х" to "h", "ц" to "c", "ч" to "ch", "ш" to "sh", "щ" to "sh'", "ъ" to "",
+        "ы" to "i", "ь" to "", "э" to "e", "ю" to "yu", "я" to "ya" )
+
     fun parseFullName(fullName : String?) : Pair<String?, String?>{
         val parts : List<String>? = fullName?.trimIndent()?.split(" ")
 
@@ -15,19 +21,19 @@ object Utils {
         return firstName to lastName
     }
 
-    private fun parseFullName(fullName : String?, delimiter : String = " ") : Pair<String?, String?>{
-
-        val parts : List<String>? = fullName?.split(delimiter)
-
-        var firstName = parts?.getOrNull(0)
-        var lastName = parts?.getOrNull(1)
-
-        if (firstName.equals("")) firstName = null
-        if (lastName.equals("")) lastName = null
-
-        //аналог return Pair(firstName, lastName)
-        return firstName to lastName
-    }
+//    private fun parseFullName(fullName : String?, delimiter : String = " ") : Pair<String?, String?>{
+//
+//        val parts : List<String>? = fullName?.split(delimiter)
+//
+//        var firstName = parts?.getOrNull(0)
+//        var lastName = parts?.getOrNull(1)
+//
+//        if (firstName.equals("")) firstName = null
+//        if (lastName.equals("")) lastName = null
+//
+//        //аналог return Pair(firstName, lastName)
+//        return firstName to lastName
+//    }
 
     /**
      * принимает в качестве аргументов имя и фамилию пользователя
@@ -75,105 +81,31 @@ object Utils {
         firstName = translateStrings(firstName)
         lastName = translateStrings(lastName)
 
-        var result = ""
-
         return if (firstName != null && lastName != null)
             "$firstName$divider$lastName"
-//            "${firstName.capitalize()}$divider${lastName.capitalize()}"
-        else if (firstName != null){
-            firstName
-//            firstName.capitalize()
-        } else {
-            "$lastName"
-//            "${lastName?.capitalize()}"
-        }
+        else firstName?: "$lastName"
     }
 
-    private fun translateStrings(string: String?) : String?{
+    private fun  translateStrings(string: String?) : String?{
         var result = ""
         string?.trimIndent()?.forEach {
-                char -> when(char.toString()){
-            "а" -> result += "a"
-            "б" -> result += "b"
-            "в" -> result += "v"
-            "г" -> result += "g"
-            "д" -> result += "d"
-            "е" -> result += "e"
-            "ё" -> result += "e"
-            "ж" -> result += "zh"
-            "з" -> result += "z"
-            "и" -> result += "i"
-            "й" -> result += "i"
-            "к" -> result += "k"
-            "л" -> result += "l"
-            "м" -> result += "m"
-            "н" -> result += "n"
-            "о" -> result += "o"
-            "п" -> result += "p"
-            "р" -> result += "r"
-            "с" -> result += "s"
-            "т" -> result += "t"
-            "у" -> result += "u"
-            "ф" -> result += "f"
-            "х" -> result += "h"
-            "ц" -> result += "c"
-            "ч" -> result += "ch"
-            "ш" -> result += "sh"
-            "щ" -> result += "sh'"
-            "ъ" -> result += ""
-            "ы" -> result += "i"
-            "ь" -> result += ""
-            "э" -> result += "e"
-            "ю" -> result += "yu"
-            "я" -> result += "ya"
+            char ->
+            run {
+                val isUpperCase: Boolean = char.isUpperCase()
+                val letter = char.toString()
 
-            "а".capitalize() -> result += "a".capitalize()
-            "б".capitalize() -> result += "b".capitalize()
-            "в".capitalize() -> result += "v".capitalize()
-            "г".capitalize() -> result += "g".capitalize()
-            "д".capitalize() -> result += "d".capitalize()
-            "е".capitalize() -> result += "e".capitalize()
-            "ё".capitalize() -> result += "e".capitalize()
-            "ж".capitalize() -> result += "zh".capitalize()
-            "з".capitalize() -> result += "z".capitalize()
-            "и".capitalize() -> result += "i".capitalize()
-            "й".capitalize() -> result += "i".capitalize()
-            "к".capitalize() -> result += "k".capitalize()
-            "л".capitalize() -> result += "l".capitalize()
-            "м".capitalize() -> result += "m".capitalize()
-            "н".capitalize() -> result += "n".capitalize()
-            "о".capitalize() -> result += "o".capitalize()
-            "п".capitalize() -> result += "p".capitalize()
-            "р".capitalize() -> result += "r".capitalize()
-            "с".capitalize() -> result += "s".capitalize()
-            "т".capitalize() -> result += "t".capitalize()
-            "у".capitalize() -> result += "u".capitalize()
-            "ф".capitalize() -> result += "f".capitalize()
-            "х".capitalize() -> result += "h".capitalize()
-            "ц".capitalize() -> result += "c".capitalize()
-            "ч".capitalize() -> result += "ch".capitalize()
-            "ш".capitalize() -> result += "sh".capitalize()
-            "щ".capitalize() -> result += "sh'".capitalize()
-            "ъ".capitalize() -> result += "".capitalize()
-            "ы".capitalize() -> result += "i".capitalize()
-            "ь".capitalize() -> result += "".capitalize()
-            "э".capitalize() -> result += "e".capitalize()
-            "ю".capitalize() -> result += "yu".capitalize()
-            "я".capitalize() -> result += "ya".capitalize()
+                result += if (mapLetters.containsKey(letter.toLowerCase())){
+                    if (isUpperCase)
+                        mapLetters[letter.toLowerCase()]?.capitalize()
+                    else
+                        mapLetters[letter.toLowerCase()]
+                } else
+                    letter
+            }
 
-            else -> result += char.toString()
-        }
         }
 
         return if (result == "") null
         else result
-
-
     }
-
-
-
-
-
-
 }
