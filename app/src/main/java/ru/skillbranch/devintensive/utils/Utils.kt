@@ -3,7 +3,7 @@ package ru.skillbranch.devintensive.utils
 object Utils {
 
     fun parseFullName(fullName : String?) : Pair<String?, String?>{
-        val parts : List<String>? = fullName?.split(" ")
+        val parts : List<String>? = fullName?.trimIndent()?.split(" ")
 
         var firstName = parts?.getOrNull(0)
         var lastName = parts?.getOrNull(1)
@@ -78,17 +78,20 @@ object Utils {
         var result = ""
 
         return if (firstName != null && lastName != null)
-            "${firstName.capitalize()}$divider${lastName.capitalize()}"
+            "$firstName$divider$lastName"
+//            "${firstName.capitalize()}$divider${lastName.capitalize()}"
         else if (firstName != null){
-            firstName.capitalize()
+            firstName
+//            firstName.capitalize()
         } else {
-            "${lastName?.capitalize()}"
+            "$lastName"
+//            "${lastName?.capitalize()}"
         }
     }
 
     private fun translateStrings(string: String?) : String?{
         var result = ""
-        string?.trimIndent()?.toLowerCase()?.forEach {
+        string?.trimIndent()?.forEach {
                 char -> when(char.toString()){
             "а" -> result += "a"
             "б" -> result += "b"
@@ -123,6 +126,41 @@ object Utils {
             "э" -> result += "e"
             "ю" -> result += "yu"
             "я" -> result += "ya"
+
+            "а".capitalize() -> result += "a".capitalize()
+            "б".capitalize() -> result += "b".capitalize()
+            "в".capitalize() -> result += "v".capitalize()
+            "г".capitalize() -> result += "g".capitalize()
+            "д".capitalize() -> result += "d".capitalize()
+            "е".capitalize() -> result += "e".capitalize()
+            "ё".capitalize() -> result += "e".capitalize()
+            "ж".capitalize() -> result += "zh".capitalize()
+            "з".capitalize() -> result += "z".capitalize()
+            "и".capitalize() -> result += "i".capitalize()
+            "й".capitalize() -> result += "i".capitalize()
+            "к".capitalize() -> result += "k".capitalize()
+            "л".capitalize() -> result += "l".capitalize()
+            "м".capitalize() -> result += "m".capitalize()
+            "н".capitalize() -> result += "n".capitalize()
+            "о".capitalize() -> result += "o".capitalize()
+            "п".capitalize() -> result += "p".capitalize()
+            "р".capitalize() -> result += "r".capitalize()
+            "с".capitalize() -> result += "s".capitalize()
+            "т".capitalize() -> result += "t".capitalize()
+            "у".capitalize() -> result += "u".capitalize()
+            "ф".capitalize() -> result += "f".capitalize()
+            "х".capitalize() -> result += "h".capitalize()
+            "ц".capitalize() -> result += "c".capitalize()
+            "ч".capitalize() -> result += "ch".capitalize()
+            "ш".capitalize() -> result += "sh".capitalize()
+            "щ".capitalize() -> result += "sh'".capitalize()
+            "ъ".capitalize() -> result += "".capitalize()
+            "ы".capitalize() -> result += "i".capitalize()
+            "ь".capitalize() -> result += "".capitalize()
+            "э".capitalize() -> result += "e".capitalize()
+            "ю".capitalize() -> result += "yu".capitalize()
+            "я".capitalize() -> result += "ya".capitalize()
+
             else -> result += char.toString()
         }
         }

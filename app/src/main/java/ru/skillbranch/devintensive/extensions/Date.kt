@@ -53,8 +53,8 @@ fun Date.add(value: Int, units: TimeUnits = TimeUnits.SECOND) : Date{
  * 26ч - 360д "N дней назад"
  * >360д "более года назад"
  */
-fun Date.humanizeDiff(date : Date): String {
-//fun Date.humanizeDiff(date : Date = Date()): String {
+//fun Date.humanizeDiff(date : Date): String {
+fun Date.humanizeDiff(date : Date = Date()): String {
 
 
 
