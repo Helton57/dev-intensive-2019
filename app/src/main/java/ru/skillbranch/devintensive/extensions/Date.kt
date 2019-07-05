@@ -380,50 +380,48 @@ enum class TimeUnits{
     SECOND,
     MINUTE,
     HOUR,
-    DAY
-}
+    DAY;
 
-fun TimeUnits.plural(value : Int) : String {
-    println("$this")
+    fun plural(value : Int) : String {
+        println("$this")
 
-    var innerValue : Int = if (value >= 100)
-        value.rem(100)
-    else
-        value
-    if (innerValue > 20){
-        innerValue = innerValue.rem(10)
+        var innerValue : Int = if (value >= 100)
+            value.rem(100)
+        else
+            value
+        if (innerValue > 20){
+            innerValue = innerValue.rem(10)
+        }
+
+        return when(this){
+            SECOND -> {
+                return when(innerValue){
+                    1 -> "$value секунду"
+                    in 2..4 -> "$value секунды"
+                    else -> "$value секунд"
+                }
+            }
+            MINUTE -> {
+                return when(innerValue){
+                    1 -> "$value минуту"
+                    in 2..4 -> "$value минуты"
+                    else -> "$value минут"
+                }
+            }
+            HOUR -> {
+                return when(innerValue){
+                    1 -> "$value час"
+                    in 2..4 -> "$value часа"
+                    else -> "$value часов"
+                }
+            }
+            DAY -> {
+                return when(innerValue){
+                    1 -> "$value день"
+                    in 2..4 -> "$value дня"
+                    else -> "$value дней"
+                }
+            }
+        }
     }
-
-    return when(this){
-        TimeUnits.SECOND -> {
-            return when(innerValue){
-                1 -> "$value секунду"
-                in 2..4 -> "$value секунды"
-                else -> "$value секунд"
-            }
-        }
-        TimeUnits.MINUTE -> {
-            return when(innerValue){
-                1 -> "$value минуту"
-                in 2..4 -> "$value минуты"
-                else -> "$value минут"
-            }
-        }
-        TimeUnits.HOUR -> {
-            return when(innerValue){
-                1 -> "$value час"
-                in 2..4 -> "$value часа"
-                else -> "$value часов"
-            }
-        }
-        TimeUnits.DAY -> {
-            return when(innerValue){
-                1 -> "$value день"
-                in 2..4 -> "$value дня"
-                else -> "$value дней"
-            }
-        }
-    }
 }
-
-
