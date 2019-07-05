@@ -9,7 +9,15 @@ const val MINUTE = 60 * SECOND
 const val HOUR = 60 * MINUTE
 const val DAY = 24 * HOUR
 
-fun Date.format(pattern : String = "HH:mm:ss dd:MM:yy") : String{
+/**
+ * Реализуй extension Date.format(pattern)
+ * возвращающий отформатированную дату по паттерну
+ * передаваемому в качестве аргумента (значение по умолчанию "HH:mm:ss dd.MM.yy" локаль "ru")
+ * Пример:
+ * Date().format() //14:00:00 27.06.19
+ * Date().format("HH:mm") //14:00
+ */
+fun Date.format(pattern : String = "HH:mm:ss dd.MM.yy") : String{
     val dateFormat = SimpleDateFormat(pattern, Locale("ru"))
     return dateFormat.format(this)
 }
