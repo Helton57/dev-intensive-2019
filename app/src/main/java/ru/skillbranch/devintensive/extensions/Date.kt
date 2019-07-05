@@ -66,12 +66,17 @@ fun Date.add(value: Int, units: TimeUnits = TimeUnits.SECOND) : Date{
 //fun Date.humanizeDiff(date : Date): String {
 fun Date.humanizeDiff(date : Date = this): String {
 
-    var differenceTime = Date().time - date.time
+    println("$date  \n $this")
+
+//    var differenceTime = Date().time - date.time
+    var differenceTime = date.time - this.time
+
+            println("differenceTime = $differenceTime")
 
     if (differenceTime >= 0) //now or future
         return when(differenceTime){
             in 0L* SECOND..1L* SECOND -> "только что"
-            in 1* SECOND..45* SECOND -> "несколько секунд назад"
+            in 1L* SECOND..45L* SECOND -> "несколько секунд назад"
             in 45* SECOND..75* SECOND -> "минуту назад"
 
             in 75* SECOND..45*MINUTE -> createTimeCommentsPast(differenceTime/ MINUTE, TimeUnits.MINUTE)
@@ -84,6 +89,7 @@ fun Date.humanizeDiff(date : Date = this): String {
     else { //future
         differenceTime = abs(differenceTime)
         return when(differenceTime){
+            1* SECOND -> "только что"
             in 1* SECOND..45* SECOND -> "через несколько секунд"
             in 45* SECOND..75* SECOND -> "через минуту"
 
@@ -267,7 +273,7 @@ private fun createTimeCommentsFuture(valueTime : Long, typeOfTime : TimeUnits) :
         TimeUnits.MINUTE -> {
             if (valueTime < 21){
                 return when(valueTime){
-                    1L -> "через 1 минуту"
+                    1L -> "через $valueTime минуту"
                     in 2L..4L -> "через $valueTime минуты"
                     else -> "через $valueTime минут"
                 }
@@ -297,7 +303,7 @@ private fun createTimeCommentsFuture(valueTime : Long, typeOfTime : TimeUnits) :
         TimeUnits.HOUR -> {
             if (valueTime < 21){
                 return when(valueTime){
-                    1L -> "через час"
+                    1L -> "через $valueTime час"
                     in 2L..4L -> "через $valueTime часа"
                     else -> "через $valueTime часов"
                 }
@@ -327,7 +333,7 @@ private fun createTimeCommentsFuture(valueTime : Long, typeOfTime : TimeUnits) :
         TimeUnits.DAY -> {
             if (valueTime < 21){
                 return when(valueTime){
-                    1L -> "через день"
+                    1L -> "через $valueTime день"
                     in 2L..4L -> "через $valueTime дня"
                     else -> "через $valueTime дней"
                 }
