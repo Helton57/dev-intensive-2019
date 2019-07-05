@@ -72,20 +72,23 @@ fun Date.add(value: Int, units: TimeUnits = TimeUnits.SECOND) : Date{
  * >360д "более чем через год"
  */
 //fun Date.humanizeDiff(date : Date): String {
-fun Date.humanizeDiff(date : Date = this): String {
+fun Date.humanizeDiff(date : Date = Date()): String {
 
-    println("$date  \n $this")
+    val timeThis = this.time
+    val timeNow = date.time
 
-//    var differenceTime = Date().time - date.time
-    var differenceTime = date.time - this.time
+    var differenceTime = timeNow - timeThis
+    println("differenceTime = $differenceTime")
 
-            println("differenceTime = $differenceTime")
+    differenceTime = fixDifferenceTime(differenceTime)
+
+    println("differenceTime = $differenceTime")
 
     if (differenceTime >= 0) //now or future
         return when(differenceTime){
-            in 0L* SECOND..1L* SECOND -> "только что"
-            in 1L* SECOND..45L* SECOND -> "несколько секунд назад"
-            in 45* SECOND..75* SECOND -> "минуту назад"
+            in 0* SECOND..SECOND -> "только что"
+            in 1* SECOND..45* SECOND -> "несколько секунд назад"
+            in 46L* SECOND..75L* SECOND -> "минуту назад"
 
             in 75* SECOND..45*MINUTE -> createTimeCommentsPast(differenceTime/ MINUTE, TimeUnits.MINUTE)
             in 45*MINUTE..75*MINUTE -> "час назад"
@@ -110,6 +113,8 @@ fun Date.humanizeDiff(date : Date = this): String {
         }
     }
 }
+
+private fun fixDifferenceTime(value : Long) = value.div(1000) * 1000
 
 private fun createTimeCommentsPast(valueTime : Long, typeOfTime : TimeUnits) : String {
     return when(typeOfTime){
