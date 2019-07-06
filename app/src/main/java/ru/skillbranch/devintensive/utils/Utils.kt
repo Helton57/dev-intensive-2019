@@ -76,23 +76,16 @@ object Utils {
      * Utils.transliteration("Amazing Петр","_") //Amazing_Petr
      */
     fun transliteration(payload: String, divider : String = " "): String {
-        var (firstName, lastName) = parseFullName(payload)
 
-        firstName = translateStrings(firstName)
-        lastName = translateStrings(lastName)
-
-        return if (firstName != null && lastName != null)
-            "$firstName$divider$lastName"
-        else firstName?: "$lastName"
-    }
-
-    private fun  translateStrings(string: String?) : String?{
         var result = ""
-        string?.trimIndent()?.forEach {
-            char ->
+        payload.trimIndent().forEach {
+                char ->
             run {
+
                 val isUpperCase: Boolean = char.isUpperCase()
-                val letter = char.toString()
+                var letter = char.toString()
+
+                if (letter == " ") letter = divider
 
                 result += if (mapLetters.containsKey(letter.toLowerCase())){
                     if (isUpperCase)
@@ -104,8 +97,6 @@ object Utils {
             }
 
         }
-
-        return if (result == "") null
-        else result
+        return result
     }
 }
