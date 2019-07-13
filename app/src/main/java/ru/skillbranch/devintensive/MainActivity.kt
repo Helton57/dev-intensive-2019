@@ -13,6 +13,8 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import ru.skillbranch.devintensive.extensions.hideKeyboard
+import ru.skillbranch.devintensive.extensions.isKeyboardOpen
 import ru.skillbranch.devintensive.models.Bender
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
@@ -29,7 +31,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(R.layout.activity_main)
         Log.d("M_MainActivity", "onCreate")
 
-//        useImeOptions()
+        useImeOptions()
 
         benderImage = iv_bender
         textTxt = tv_text
@@ -86,6 +88,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         if (v?.id == R.id.iv_send){
+//            Toast.makeText(messageEt.context, "${isKeyboardOpen()}", Toast.LENGTH_SHORT).show()
+
             val (phrase, color) = benderObj.listenAnswer(messageEt.text.toString().toLowerCase())
             messageEt.setText("")
             val (r, g, b) = color
@@ -123,7 +127,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                             v, actionId, event ->
             return@setOnEditorActionListener when(actionId){
                 EditorInfo.IME_ACTION_DONE -> {
-                    Toast.makeText(this, "success", Toast.LENGTH_SHORT).show()
+                    hideKeyboard()
                     true
                 }
                 else -> false
