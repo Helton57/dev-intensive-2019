@@ -44,11 +44,14 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         val (r, g, b) = benderObj.status.color
         benderImage.setColorFilter(Color.rgb(r,g,b), PorterDuff.Mode.MULTIPLY)
 
-
-//        val inputText = savedInstanceState?.getString("INPUT_TEXT") ?: ""
-//        messageEt.setText(inputText)
         textTxt.text = benderObj.askQuestion()
         sendBtn.setOnClickListener(this)
+
+        /**
+         * task 1 - Реализуй сохранение введенного текста в поле EditText (et_message) при пересоздании Activity
+         */
+        val inputText = savedInstanceState?.getString("INPUT_TEXT") ?: ""
+        messageEt.setText(inputText)
     }
 
     override fun onStart() {
@@ -102,7 +105,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         super.onSaveInstanceState(outState)
         outState?.putString("STATUS", benderObj.status.name)
         outState?.putString("QUESTION", benderObj.question.name)
-//        outState?.putString("INPUT_TEXT", textTxt.toString())
+        outState?.putString("INPUT_TEXT", textTxt.toString())
 
         Log.d("M_MainActivity", "onSaveInstanceState ${benderObj.status.name} ${benderObj.question.name}")
     }
