@@ -70,7 +70,7 @@ class Bender (var status: Status = Status.NORMAL, var question: Question = Quest
      */
     fun listenAnswer(answer : String) : Pair <String, Triple<Int, Int, Int>>{
         val defaultStringSuccess = "Отлично - ты справился"
-        val defaultStringError = "Это неправильный ответ!"
+        val defaultStringError = "Это неправильный ответ"
         val defaultStringErrorAgain = "Это неправильный ответ. Давай все по новой"
 
         var validationErrorMessage = question.getValidationError(answer)
