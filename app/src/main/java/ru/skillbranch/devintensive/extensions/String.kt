@@ -50,3 +50,9 @@ fun String.stripHtml(): String? =
         .replace(Regex("(&[a-z]*?;)|(&#[0-9]*;)"), "")
         .replace(Regex("<[^>]*>"), "")
         .replace(Regex("[ ]+"), " ")
+
+fun String.isNonDigitsOnly() : Boolean{
+    var resultValue = true
+    for (char : Char in this) resultValue = resultValue && (!char.isDigit())
+    return resultValue
+}
