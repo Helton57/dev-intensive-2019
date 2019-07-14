@@ -69,11 +69,17 @@ class Bender (var status: Status = Status.NORMAL, var question: Question = Quest
      */
     fun listenAnswer(answer : String) : Pair <String, Triple<Int, Int, Int>>{
 
-        return if (question.answers.contains(answer)){
-            val validationResult = validateString(answer)
-            question = question.nextQuestion()
-//            "Отлично - ты справился\n${question.question}" to status.color
-            "$validationResult\n${question.question}" to status.color
+        return if (question.answers.contains(answer.toLowerCase())){
+            val defaultString = "Отлично - ты справился"
+            var validationErrorMessage = validateString(answer)
+            /**
+             * change question only if isValidate has not errors
+             */
+            if (validationErrorMessage == null){
+                question = question.nextQuestion()
+                validationErrorMessage = defaultString
+            }
+            "$validationErrorMessage\n${question.question}" to status.color
         } else {
             status = status.nextStatus()
             if (status == Status.values()[0]){
@@ -171,8 +177,8 @@ class Bender (var status: Status = Status.NORMAL, var question: Question = Quest
         }
     }
 
-    fun validateString(answer : String) : String {
-        val resultString = "Отлично - ты справился"
+    private fun validateString(answer : String) : String? {
+        val resultString = null
         return when(question){
             Question.NAME -> {
                 if (answer[0].isUpperCase())

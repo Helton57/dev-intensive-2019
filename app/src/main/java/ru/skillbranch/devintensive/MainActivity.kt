@@ -90,7 +90,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         if (v?.id == R.id.iv_send){
 //            Toast.makeText(messageEt.context, "${isKeyboardOpen()}", Toast.LENGTH_SHORT).show()
 
-            val (phrase, color) = benderObj.listenAnswer(messageEt.text.toString().toLowerCase())
+            val (phrase, color) = benderObj.listenAnswer(messageEt.text.toString())
             messageEt.setText("")
             val (r, g, b) = color
             benderImage.setColorFilter(Color.rgb(r,g,b), PorterDuff.Mode.MULTIPLY)
