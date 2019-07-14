@@ -32,17 +32,9 @@ fun Activity.isKeyboardOpen() : Boolean{
     val rootView = this.window.decorView // this = activity
     rootView.getWindowVisibleDisplayFrame(rect)
 
-    val visibleDisplayFrameHeight = rect.top
+    val visibleDisplayFrameHeight = rect.bottom - rect.top
     val screenHeight = this.windowManager.defaultDisplay.height
     return (screenHeight - visibleDisplayFrameHeight > 100)
 }
 
-fun Activity.isKeyboardClosed() : Boolean{
-    val rect = Rect()
-    val rootView = this.window.decorView // this = activity
-    rootView.getWindowVisibleDisplayFrame(rect)
-
-    val visibleDisplayFrameHeight = rect.top
-    val screenHeight = this.windowManager.defaultDisplay.height
-    return screenHeight - visibleDisplayFrameHeight <= 100
-}
+fun Activity.isKeyboardClosed() : Boolean = isKeyboardOpen().not()
