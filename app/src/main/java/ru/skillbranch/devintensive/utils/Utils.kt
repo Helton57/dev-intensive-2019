@@ -21,20 +21,6 @@ object Utils {
         return firstName to lastName
     }
 
-//    private fun parseFullName(fullName : String?, delimiter : String = " ") : Pair<String?, String?>{
-//
-//        val parts : List<String>? = fullName?.split(delimiter)
-//
-//        var firstName = parts?.getOrNull(0)
-//        var lastName = parts?.getOrNull(1)
-//
-//        if (firstName.equals("")) firstName = null
-//        if (lastName.equals("")) lastName = null
-//
-//        //аналог return Pair(firstName, lastName)
-//        return firstName to lastName
-//    }
-
     /**
      * принимает в качестве аргументов имя и фамилию пользователя
      * (null, пустую строку) и
