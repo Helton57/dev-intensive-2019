@@ -85,4 +85,14 @@ object Utils {
         }
         return result
     }
+
+    fun getNickName(firstName: String?, lastName : String?, divider: String = "_") : String {
+        return if (firstName != null && firstName.isNotEmpty() && lastName != null && lastName.isNotEmpty())
+            transliteration("$firstName $lastName", divider) else
+        if (firstName != null && firstName.isNotEmpty()){
+            transliteration(firstName, divider)
+        } else if (lastName != null && lastName.isNotEmpty()){
+            transliteration(lastName, divider)
+        } else ""
+    }
 }
