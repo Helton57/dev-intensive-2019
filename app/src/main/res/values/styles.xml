@@ -49,7 +49,7 @@
         <item name="android:fontFamily">sans-serif-medium</item>
         <item name="android:textSize">@dimen/font_large_20</item>
     </style>
-    <style name="Profile.InfoItem" parent="Profile">
+    <style name="Profile.InfoItem">
         <item name="android:paddingTop">@dimen/spacing_normal_16</item>
         <item name="android:paddingBottom">5dp</item>
         <item name="android:paddingStart">@dimen/spacing_normal_16</item>
