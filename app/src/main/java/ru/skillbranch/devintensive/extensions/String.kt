@@ -56,3 +56,42 @@ fun String.isNonDigitsOnly() : Boolean{
     for (char : Char in this) resultValue = resultValue && (!char.isDigit())
     return resultValue
 }
+
+
+/**
+ * https://dev.to/catherinecodes/a-regex-cheatsheet-for-all-those-regex-haters-and-lovers--2cj1
+ *
+ * /* lookaheads */
+    regex = /z(?=a)/; // positive lookahead... matches the "z" before the "a" in pizza" but not the first "z"
+    regex = /z(?!a)/; // negative lookahead... matches the first "z" but not the "z" before the "a"
+ * /* groups */
+    regex = /it is (ice )?cold outside/; // matches "it is ice cold outside" and "it is cold outside"
+    regex = /it is (?:ice )?cold outside/; // same as above except it is a non-capturing group
+
+ */
+fun String.isRepositoryGithubValid() : Boolean{
+    val exceptions = getExcludePathOfGithub().joinToString("|")
+    val regExrString = "^(https://)?(www\\.)?(github\\.com/)(?!($exceptions)(?=/|\$))[a-zA-Z\\d](?:[a-zA-Z\\d]|-(?=[a-zA-Z\\d])){0,38}(/)?$"
+
+    return if (isEmpty())
+        true
+    else {
+        regExrString.toRegex().matches(this)
+    }
+}
+
+fun getExcludePathOfGithub() = arrayOf(
+    "enterprise",
+    "features",
+    "topics",
+    "collections",
+    "trending",
+    "events",
+    "marketplace",
+    "pricing",
+    "nonprofit",
+    "customer-stories",
+    "security",
+    "login",
+    "join"
+)
