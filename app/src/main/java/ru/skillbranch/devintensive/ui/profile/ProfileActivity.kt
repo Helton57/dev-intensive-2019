@@ -43,9 +43,9 @@ class ProfileActivity : AppCompatActivity() {
      * Для API Level >= 28 будет вызван после onStop()
      * Не будет вызван, если Activity будет явно закрыто пользователем при нажатии на системную клавишу back
      */
-    override fun onSaveInstanceState(outState: Bundle?) {
+    override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState?.putBoolean(IS_EDIT_MODE, isEditMode)
+        outState.putBoolean(IS_EDIT_MODE, isEditMode)
     }
 
     private fun initViewModel(){
