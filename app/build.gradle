@@ -20,6 +20,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    androidExtensions {
+        experimental = true
+    }
 }
 
 dependencies {
@@ -44,3 +48,16 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.2.0'
 }
+
+
+//tasks.withType(Test) {
+//    testLogging {
+//        exceptionFormat "full"
+//        events "failed", "passed"
+//        info.events = ["failed"]
+//        showExceptions true
+//        showCauses true
+//        showStackTraces true
+//        info.exceptionFormat = "full"
+//    }
+//}

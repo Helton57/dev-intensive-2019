@@ -1,19 +1,19 @@
-package ru.skillbranch.devintensive.models
+package ru.skillbranch.devintensive.models.data
 
+import ru.skillbranch.devintensive.extensions.humanizeDiff
 import ru.skillbranch.devintensive.utils.Utils
 import java.util.*
 
 data class User(
-    val id : String,
-    var firstName : String?,
-    var lastName : String?,
-    var avatar : String?,
-    var rating : Int = 0,
-    var respect : Int = 0,
-    var lastVisit : Date = Date(),
-    var isOnline : Boolean = false
-)
-{
+    val id: String,
+    var firstName: String?,
+    var lastName: String?,
+    var avatar: String?,
+    var rating: Int = 0,
+    var respect: Int = 0,
+    var lastVisit: Date? = Date(),
+    var isOnline: Boolean = false
+) {
     constructor(id: String, firstName: String?, lastName: String?) : this(
         id = id,
         firstName = firstName,
@@ -21,13 +21,30 @@ data class User(
         avatar = null
     )
 
+    fun toUserItem(): UserItem {
+        val lastActivity = when {
+            lastVisit == null -> "Еще ни разу не заходил"
+            isOnline -> "online"
+            else -> "Последний раз был ${lastVisit?.humanizeDiff()}"
+        }
+
+        return UserItem(
+            id = id,
+            fullName = "${firstName.orEmpty()} ${lastName.orEmpty()}",
+            initials = Utils.toInitials(firstName, lastName),
+            avatar = avatar,
+            lastActivity = lastActivity,
+            isOnline = isOnline
+        )
+    }
+
     init {
         println("init user $id = $this")
     }
 
-    companion object UserFactory{
+    companion object UserFactory {
         var lastId = -1
-        fun makeUser(fullName : String?) : User {
+        fun makeUser(fullName: String?): User {
             lastId++
 
             val (firstName, lastName) = Utils.parseFullName(fullName)
@@ -41,13 +58,13 @@ data class User(
 
     class Builder {
         private var id: String = ""
-        private var firstName : String? = null
-        private var lastName : String? = null
-        private var avatar : String? = null
-        private var rating : Int = 0
-        private var respect : Int = 0
-        private var lastVisit : Date = Date()
-        private var isOnline : Boolean = false
+        private var firstName: String? = null
+        private var lastName: String? = null
+        private var avatar: String? = null
+        private var rating: Int = 0
+        private var respect: Int = 0
+        private var lastVisit: Date = Date()
+        private var isOnline: Boolean = false
 
         fun id(id: String) = apply { this.id = id }
         fun firstName(firstName: String?) = apply { this.firstName = firstName }
