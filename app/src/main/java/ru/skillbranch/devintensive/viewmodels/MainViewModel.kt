@@ -3,11 +3,14 @@ package ru.skillbranch.devintensive.viewmodels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import ru.skillbranch.devintensive.models.data.Chat
 import ru.skillbranch.devintensive.models.data.ChatItem
 import ru.skillbranch.devintensive.repositories.ChatRepository
 
 class MainViewModel : ViewModel() {
     private val chatRepository = ChatRepository
+    private var archivedChat : Chat? = null
+
     private val chats = Transformations.map(chatRepository.loadChats()) { chats ->
         return@map chats.filter { !it.isArchived }
             .map { it.toChatItem() }

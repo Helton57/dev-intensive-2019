@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="@dimen/item_size"
@@ -10,59 +11,68 @@
         android:id="@+id/iv_avatar_single"
         android:layout_width="@dimen/avatar_item_size"
         android:layout_height="@dimen/avatar_item_size"
-        android:layout_alignParentStart="true" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <View
         android:id="@+id/sv_indicator"
         android:layout_width="12dp"
         android:layout_height="12dp"
-        android:layout_alignParentBottom="true"
         android:layout_toStartOf="@id/tv_title_single"
-        android:background="@drawable/bg_indicator" />
+        android:background="@drawable/bg_indicator"
+        app:layout_constraintCircle="@id/iv_avatar_single"
+        app:layout_constraintCircleAngle="135"
+        app:layout_constraintCircleRadius="20dp"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/tv_title_single"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spacing_normal_16"
         android:layout_marginEnd="@dimen/spacing_normal_16"
-        android:layout_toStartOf="@id/tv_date_single"
-        android:layout_toEndOf="@id/iv_avatar_single"
+        android:ellipsize="end"
         android:fontFamily="sans-serif-medium"
+        android:maxLines="1"
         android:textColor="@color/color_primary"
         android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@id/tv_date_single"
+        app:layout_constraintStart_toEndOf="@id/iv_avatar_single"
+        app:layout_constraintTop_toTopOf="parent"
         tools:text="chat title" />
 
     <TextView
         android:id="@+id/tv_message_single"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_title_single"
         android:layout_marginStart="@dimen/spacing_normal_16"
         android:layout_marginEnd="@dimen/spacing_normal_16"
-        android:layout_toStartOf="@id/tv_counter_single"
-        android:layout_toEndOf="@id/iv_avatar_single"
+        android:ellipsize="end"
         android:fontFamily="sans-serif-medium"
+        android:maxLines="1"
         android:textColor="@color/color_gray_dark"
         android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@id/tv_counter_single"
+        app:layout_constraintStart_toEndOf="@id/iv_avatar_single"
+        app:layout_constraintTop_toBottomOf="@id/tv_title_single"
         tools:text="Когда я проходил интенсив, я мало спал" />
 
     <TextView
         android:id="@+id/tv_date_single"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
         android:textColor="@color/color_gray_dark"
         android:textSize="@dimen/font_small_10"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:text="18:00" />
 
     <TextView
         android:id="@+id/tv_counter_single"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
         android:background="@drawable/bg_counter"
         android:gravity="center"
         android:minWidth="@dimen/counter_size"
@@ -71,6 +81,8 @@
         android:paddingEnd="4dp"
         android:textColor="@android:color/white"
         android:textSize="@dimen/font_small_10"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         tools:text="11" />
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
