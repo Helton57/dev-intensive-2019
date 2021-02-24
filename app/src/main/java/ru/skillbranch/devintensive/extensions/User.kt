@@ -23,4 +23,6 @@ fun User.toUserView() : UserView {
         )
 }
 
+fun User.getFullName() = "${firstName.orEmpty()} ${lastName.orEmpty()}"
+
 

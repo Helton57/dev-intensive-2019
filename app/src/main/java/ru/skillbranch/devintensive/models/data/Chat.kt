@@ -1,8 +1,11 @@
 package ru.skillbranch.devintensive.models.data
 
 import androidx.annotation.VisibleForTesting
+import ru.skillbranch.devintensive.extensions.getFullName
 import ru.skillbranch.devintensive.extensions.shortFormat
 import ru.skillbranch.devintensive.models.BaseMessage
+import ru.skillbranch.devintensive.models.ImageMessage
+import ru.skillbranch.devintensive.models.TextMessage
 import ru.skillbranch.devintensive.utils.Utils
 import java.util.*
 
@@ -15,20 +18,30 @@ data class Chat(
 ) {
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     fun unreadableMessageCount(): Int {
-        //TODO implement me
-        return 0
+        return messages.filter { !it.isReaded }.size
     }
 
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     fun lastMessageDate(): Date? {
-        //TODO implement me
-        return Date()
+        val copy = messages
+        return copy.maxByOrNull { it.date }?.date
     }
 
+    //lastMessageShort(): Pair - должен вернуть пару значений.
+    // Первое - строка с текстом сообщения (если сообщение TextMessage),
+    // строка "user.firstName - отправил фото" (если сообщение ImageMessage).
+    // Второе значение - имя автора сообщения
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     fun lastMessageShort(): Pair<String, String?> = when (val lastMessage = messages.lastOrNull()) {
-        //TODO implement me
-        else -> "Сообщений еще нет" to "John Doe"
+        is TextMessage -> {
+            val user = lastMessage.from
+            "${lastMessage.text}" to user.getFullName()
+        }
+        is ImageMessage -> {
+            val user = lastMessage.from
+            "${user.firstName} - отправил фото" to user.getFullName()
+        }
+        else -> "Сообщений еще нет" to lastMessage?.from?.getFullName()
     }
 
     private fun isSingle(): Boolean = members.size == 1
